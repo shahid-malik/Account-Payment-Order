@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<template id="account_payment_order_report_id">
+    <t t-call="report.html_container">
+        <t t-call="report.external_layout">
+         <div class="page">
+            <t t-set="total" t-value="0" />
+            <t t-foreach="docs" t-as="o">
+
+               <h1 class="text-center" style="margin-bottom:15px">Account Payment Order</h1>
+                <br/><br/>
+
+                  <div style="float: left;width: 50%;"><p style="width: 30%;float: left;font-weight: bold;">Number</p>
+                     <p style="width: 50%;float: left;"><t t-esc="o.number"/></p>
+                  </div>
+                  <div style="float: left;width: 50%;"><p  style="width: 30%;float: left;font-weight: bold;">Date</p>
+                      <p style="width: 30%;float: left;"><t t-esc="o.date"/></p>
+                  </div>
+
+                  <div style="float: left;width: 50%;"><p style="width: 30%;float: left;font-weight: bold;">Cheque No</p>
+                     <p style="width: 50%;float: left;"><t t-esc="o.cheque_no"/></p>
+                  </div>
+                  <div style="float: left;width: 50%;"><p  style="width: 30%;float: left;font-weight: bold;">Suplier</p>
+                      <p style="width: 50%;float: left;"><t t-esc="o.supplier_id.parent_id.name"/><span>.</span><t t-esc="o.supplier_id.name"/></p>
+                  </div>
+
+                  <div style="float: left;width: 50%;"><p style="width: 30%;float: left;font-weight: bold;">Name</p>
+                     <p style="width: 50%;float: left;"><t t-esc="o.partner_name"/></p>
+                  </div>
+                  <div style="float: left;width: 50%;"><p  style="width: 30%;float: left;font-weight: bold;">Total Amount</p>
+                      <p style="width: 50%;float: left;"><t t-esc="o.amount_text"/></p>
+                  </div>
+
+                  <div style="float: left;width: 50%;"><p style="width: 30%;float: left;font-weight: bold;">Payment Type</p>
+                     <p style="width: 50%;float: left;"><t t-esc="o.payment_type"/></p>
+                  </div>
+                  <div style="float: left;width: 50%;"><p  style="width: 30%;float: left;font-weight: bold;">Payment Method</p>
+                      <p style="width: 50%;float: left;"><t t-esc="o.journal_id.name"/></p>
+                  </div>
+
+                  <div style="float: left;width: 50%;"><p style="width: 30%;float: left;font-weight: bold;">Credit account</p>
+                     <p style="width: 50%;float: left;"><t t-esc="o.cr_account_id.code"/><span> </span><t t-esc="o.cr_account_id.name"/></p>
+                  </div>
+                  <div style="float: left;width: 50%;"><p  style="width: 30%;float: left;font-weight: bold;">Notes</p>
+                      <p style="width: 50%;float: left;"><t t-esc="o.note"/></p>
+                  </div>
+
+                  <div style="float: left;width: 50%;"><p style="width: 30%;float: left;font-weight: bold;">Status</p>
+                     <p style="width: 50%;float: left;"><t t-esc="o.state"/></p>
+                  </div>
+                  <div style="float: left;width: 50%;"><p  style="width: 30%;float: left;font-weight: bold;">Total Amount</p>
+                      <p style="width: 50%;float: left;"><t t-esc="o.total_amount"/></p>
+                  </div>
+
+
+                  <table class = "table table-bordered" border="3" style="margin-bottom:30px">
+                     <thead>
+                  <tr>
+                     <th> Debit Account</th>
+                     <th> Amount</th>
+                     <th> Memo</th>
+                  </tr>
+
+               </thead>
+
+
+
+               <tbody class = "employee_tbody">
+
+                  <tr t-foreach="o.payment_line" t-as="i">
+                        <tr>
+                        <td>
+                            <span t-field="i.dr_account_id.code"/><span> </span><span t-field="i.dr_account_id.name"/>
+                        </td>
+
+                        <td >
+                            <span t-field="i.amount"/>
+                            <t t-set="total" t-value="total+i.amount" />
+                        </td>
+                        <td>
+                            <span t-field="i.memo"/>
+                        </td>
+
+                        </tr>
+                     </tr>
+                         </tbody>
+                    <tr>
+                        <td>
+                        <b><span>Total</span></b>
+                        </td>
+                        <td  class= "text-right">
+                        <span />
+                            <b><span t-esc="total"/></b>
+					    	<t t-set="total" t-value="0" />
+                        </td>
+                        <td>
+                        <span />
+
+                        </td>
+                     </tr>
+                     </table>
+               <div style="margin-bottom:800px">
+               </div>
+            </t>
+
+         </div>
+
+        </t>
+    </t>
+</template>
+    </data>
+</openerp>

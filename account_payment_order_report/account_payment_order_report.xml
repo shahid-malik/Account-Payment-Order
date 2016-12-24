@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report 
+            id="action_report_account_payment_order_report"
+            string="Account Payment Order"
+            model="account.payment.order"
+            report_type="qweb-pdf"
+            file="Account Payment Order"
+            name="account_payment_order_report.account_payment_order_report_id"
+		/>
+        <!-- Acá estamos dando de alta un report tipo controller, lo damos de alta sin el atajo "record" porque no sabemos como pasar el "report_rml" con dicho atajo.  -->
+    </data>
+</openerp>

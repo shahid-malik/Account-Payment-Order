@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!-- Modificamos el footer por defecto -->
+<template id="external_layout_footer" inherit_id="report.external_layout_footer">
+
+</template>
+
+    </data>
+</openerp>
