@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+        <!-- Account Payment order SEQUENCE -->
+		<record id="kg_account_payment_order" model="ir.sequence.type">
+			<field name="name">Account Payment Order</field>
+			<field name="code">account.payment.order</field>
+		</record>
+		 <!-- Account Payment order SEQUENCE Details-->
+        <record id="kg_account_payment_order_details" model="ir.sequence">
+			<field name="name">account payment order details</field>
+			<field name="code">account.payment.order</field>
+			<field name="suffix"> </field>
+			<field name="prefix"></field>
+            <field name="prefix">EXP/%(year)s/</field>
+			<field name="padding">5</field>
+		</record>
+
+	</data>
+</openerp>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- Account Payment order form -->
+		<record id="kg_account_payment_order_form" model="ir.ui.view">
+			<field name="name">kg.account.payment.order.form</field>
+			<field name="model">account.payment.order</field>
+			<field name="arch" type="xml">
+				<form string="Account Payment Order - Form" version="8.0">
+					<header>
+						<button name="action_post" states="draft" string="Post" class="oe_highlight" type="object" />
+						<button name="action_cancel" states="post" string="Cancel" class="oe_highlight" type="object" />
+						<button name="action_set_to_draft" states="cancel" string="Set To Draft" class="oe_highlight" 
+							type="object" />
+						<field name="state" widget="statusbar" statusbar_visible="draft,post,cancel" statusbar_colors='{"draft":"red", "post": "blue","cancel":"red"}' />
+
+					</header>
+                    
+                    <sheet>
+						<group colspan="4" col="4">
+							<field name="number" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+							<field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+							<field name="cheque_no" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+							<field name="supplier_id" on_change="onchange_supplier_id(supplier_id)" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+							<field name="partner_name" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+							<field name="amount_text" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="payment_type"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="journal_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="cr_account_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="total_amount" attrs="{'readonly': True}"/>
+                            <field name="state" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="note" />
+						</group>
+
+                        <notebook>
+							<page string="Account Payment Order Lines">
+								<field name="payment_line" widget="one2many_list" on_change="onchange_payment_line()" attrs="{'readonly': [('state', '!=', 'draft')]}">
+
+                                    <form>
+										<group col="4" colspan="4">
+											<field name="dr_account_id" />
+                                            <field name="amount"  />
+                                            <field name="memo" />
+                                        </group>
+									</form>
+
+									<tree>
+										<field name="dr_account_id" />
+										<field name="amount" />
+										<field name="memo" />
+									</tree>
+								</field>
+
+							</page>					
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<!-- Account Payment order Tree -->
+		<record id="kg_account_payment_order_tree" model="ir.ui.view">
+			<field name="name">kg.account.payment.order.tree</field>
+			<field name="model">account.payment.order</field>
+			<field name="arch" type="xml">
+			<tree string="Account Payment Order - Tree">
+				<field name="number" /><field name="supplier_id" />
+				<field name="date" />
+				<field name="partner_name" />
+				<!-- <field name="amount_text" /> -->
+                <field name="cheque_no"  />
+                <field name="payment_type"  />
+                <field name="journal_id" />
+                <!-- <field name="cr_account_id" /> -->
+                <!-- <field name="note" /> -->
+                <field name="total_amount" />
+                <field name="state" />
+				</tree>
+			</field>
+		</record>
+		<!-- Account Payment order Action -->
+        <record id="kg_action_account_payment_order" model="ir.actions.act_window">
+			<field name="name">Account Payment Order</field>
+			<field name="res_model">account.payment.order</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- Account Payment order Menu -->
+        <menuitem name="Account Payment Order" id="kg_menu_account_payment_order"
+			parent="account.menu_finance_receivables" sequence="1" action="kg_action_account_payment_order" />
+			<!-- groups="mrp.group_mrp_user,mrp.group_mrp_manager"  -->
+
+	</data>
+</openerp>
